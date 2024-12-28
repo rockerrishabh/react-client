@@ -7,7 +7,6 @@ import {
   SignInSchema,
   SignUpSchema,
 } from "@/contexts/AuthContext";
-import { delay } from "@/lib/utils";
 
 type AuthProviderProps = {
   children: React.ReactNode;
@@ -80,9 +79,8 @@ export function AuthProvider({ children, ...props }: AuthProviderProps) {
       const { accessToken } = response.data;
       type DecodedType = Omit<Auth, "accessToken">;
       const decodedToken = jwtDecode(accessToken as string) as DecodedType;
-      setSignInSuccess(response.data.message);
-      await delay(1000);
       setAuth({ accessToken: accessToken as string, ...decodedToken });
+      setSignInSuccess(response.data.message);
     } catch (err) {
       if (err instanceof AxiosError) {
         setSignInError(err.response?.data.message);
