@@ -33,7 +33,7 @@ export function AuthProvider({ children, ...props }: AuthProviderProps) {
         success: boolean;
         message: string;
         accessToken?: string;
-      }>(`http://localhost:5000/user/refresh`, {
+      }>(`https://giant-dona-rockerrishabh-1bfd3307.koyeb.app/user/refresh`, {
         withCredentials: true,
       });
 
@@ -66,9 +66,13 @@ export function AuthProvider({ children, ...props }: AuthProviderProps) {
         success: boolean;
         message: string;
         accessToken?: string;
-      }>("http://localhost:5000/user/sign-in", values, {
-        withCredentials: true,
-      });
+      }>(
+        "https://giant-dona-rockerrishabh-1bfd3307.koyeb.app/user/sign-in",
+        values,
+        {
+          withCredentials: true,
+        },
+      );
       if (response.status !== 200) {
         setSignInError(response.data.message);
         return;
@@ -106,7 +110,7 @@ export function AuthProvider({ children, ...props }: AuthProviderProps) {
       }
 
       const response = await axios.post<{ success: boolean; message: string }>(
-        "http://localhost:5000/user/sign-up",
+        "https://giant-dona-rockerrishabh-1bfd3307.koyeb.app/user/sign-up",
         formData,
         {
           headers: {
@@ -138,7 +142,7 @@ export function AuthProvider({ children, ...props }: AuthProviderProps) {
       const response = await axios.delete<{
         success: boolean;
         message: string;
-      }>(`http://localhost:5000/user/logout`, {
+      }>(`https://giant-dona-rockerrishabh-1bfd3307.koyeb.app/user/logout`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${auth?.accessToken}`,
